@@ -1,1 +1,21 @@
-GET http://localhost:5248/
+# GET http://localhost:5248/
+
+## Get all todos
+GET http://localhost:5248/todos
+
+## Add new todo
+POST http://localhost:5248/todos
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name" : "Write demo",
+  "dueDate" : "2021-12-31",
+  "isCompleted": false
+}
+
+## GET By ID
+GET http://localhost:5248/todos/2
+
+## Delete By ID
+DELETE http://localhost:5248/todos/2
