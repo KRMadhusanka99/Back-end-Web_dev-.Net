@@ -4,11 +4,18 @@ using Microsoft.AspNetCore.Rewrite;
 var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
+// app.MapGet("/", () => "Hello World!");
 
 // Add middleware to the pipeline
 app.UseRewriter(new RewriteOptions().AddRedirect("tasks/(.*)", "todos/$1"));
 
-// app.MapGet("/", () => "Hello World!");
+//add Custom Middleware
+app.Use(async (context, next) =>
+{
+    Console.WriteLine($"[{context.Request.Method}] {context.Request.Path} {DateTime.UtcNow}] Started");
+    await next(context);
+    Console.WriteLine($"[{context.Request.Method}] {context.Request.Path} {DateTime.UtcNow}] Finished");
+});
 
 var todos = new List<Todo>();
 
