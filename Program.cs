@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Rewrite;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
+
+// Add middleware to the pipeline
+app.UseRewriter(new RewriteOptions().AddRedirect("tasks/(.*)", "todos/$1"));
 
 // app.MapGet("/", () => "Hello World!");
 
